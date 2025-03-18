@@ -165,6 +165,7 @@ function addEventsToCalendar(events, currentWeekStart, calendarGrid) {
         const eventElement = document.createElement("div");
         eventElement.className = "event";
         eventElement.textContent = evento.nome;
+        eventElement.style.color = evento.cor;
         eventElement.style.backgroundColor = evento.cor + "4D"; // add 4D for opacity
 
         eventElement.style.top = `${100 + startPosition}px`;
