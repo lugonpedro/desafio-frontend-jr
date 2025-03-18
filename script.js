@@ -1,69 +1,15 @@
-const eventosJSON = {
-  eventos: [
-    {
-      nome: "Reunião de Planejamento",
-      data_inicio: "2025-03-05T10:00",
-      data_fim: "2025-03-05T11:30",
-      cor: "#FF5733",
-    },
-    {
-      nome: "Sprint Review",
-      data_inicio: "2025-03-12T15:00",
-      data_fim: "2025-03-12T16:00",
-      cor: "#33B5FF",
-    },
-    {
-      nome: "Treinamento de Frontend",
-      data_inicio: "2025-03-18T09:00",
-      data_fim: "2025-03-18T12:00",
-      cor: "#FFC300",
-    },
-    {
-      nome: "Lançamento de Funcionalidade",
-      data_inicio: "2025-03-25T13:00",
-      data_fim: "2025-03-25T14:00",
-      cor: "#28A745",
-    },
-    {
-      nome: "Hackathon Interno",
-      data_inicio: "2025-04-03T08:00",
-      data_fim: "2025-04-03T18:00",
-      cor: "#9B59B6",
-    },
-    {
-      nome: "Palestra de UX/UI",
-      data_inicio: "2025-04-10T14:00",
-      data_fim: "2025-04-10T16:00",
-      cor: "#FF6F61",
-    },
-    {
-      nome: "Reunião de Alinhamento de Produto",
-      data_inicio: "2025-04-21T10:30",
-      data_fim: "2025-04-21T11:30",
-      cor: "#3498DB",
-    },
-    {
-      nome: "Recesso de Feriado",
-      data_inicio: "2025-05-01T00:00",
-      data_fim: "2025-05-01T23:59",
-      cor: "#F1C40F",
-    },
-    {
-      nome: "Entrega de Projeto Alpha",
-      data_inicio: "2025-05-15T09:00",
-      data_fim: "2025-05-15T12:00",
-      cor: "#1ABC9C",
-    },
-    {
-      nome: "Avaliação Semestral",
-      data_inicio: "2025-05-30T14:00",
-      data_fim: "2025-05-30T16:00",
-      cor: "#E74C3C",
-    },
-  ],
-};
+document.addEventListener("DOMContentLoaded", async function () {
+  let eventosJSON = {};
+  try {
+    const response = await fetch("eventos.json");
+    if (!response.ok) {
+      throw new Error("Erro ao ler o arquivo");
+    }
+    eventosJSON = await response.json();
+  } catch (error) {
+    console.error("Erro:", error);
+  }
 
-document.addEventListener("DOMContentLoaded", function () {
   // get first day of week
   let currentDate = new Date();
   let currentWeekStart = new Date(currentDate);
