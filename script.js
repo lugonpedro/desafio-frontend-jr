@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 });
 
-function renderCalendar(events, currentWeekStart) {
+export function renderCalendar(events, currentWeekStart) {
   const calendarGrid = document.getElementById("calendar-grid");
   calendarGrid.innerHTML = "";
 
@@ -143,7 +143,7 @@ function renderCalendar(events, currentWeekStart) {
   addEventsToCalendar(events, currentWeekStart, calendarGrid);
 }
 
-function addEventsToCalendar(events, currentWeekStart, calendarGrid) {
+export function addEventsToCalendar(events, currentWeekStart, calendarGrid) {
   if (events) {
     events.forEach((evento) => {
       const startDate = new Date(evento.data_inicio);

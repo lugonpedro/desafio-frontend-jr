@@ -2,9 +2,12 @@
 
 Essa é a solução do [desafio proposto](https://github.com/simplify-tec/desafio-frontend-jr) pela Simplify Tecnologia
 
-## Como rodar o projeto
+## Primeiros passos
 - Clone esse repositório e entre na pasta do mesmo;
-- Instale as dependencias com ```npm i```;
-- Inicie com ```npm start```, o link para executar o projeto será mostrado no console.
+- Instale as dependencias com ```npm i```.
 
-## Como rodar os testes
+### Como iniciar o projeto
+Execute ```npm start```, o link para o projeto será mostrado no console.
+
+### Como rodar os testes
+Execute ```npm test```.
