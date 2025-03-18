@@ -10,14 +10,14 @@ describe("Calendar Tests", () => {
   beforeAll(() => {
     const html = fs.readFileSync(
       path.resolve(__dirname, "../index.html"),
-      "utf8"
+      "utf8",
     );
     dom = new JSDOM(html);
 
     try {
       const data = fs.readFileSync(
         path.resolve(__dirname, "../eventos.json"),
-        "utf8"
+        "utf8",
       );
       eventosJSON = JSON.parse(data);
     } catch (error) {
@@ -41,7 +41,7 @@ describe("Calendar Tests", () => {
       const timeColumns = document.querySelectorAll(".time-slot");
       expect(timeColumns.length).toBe(24);
 
-      const events = document.getElementsByClassName('event')
+      const events = document.getElementsByClassName("event");
       expect(events.length).toBe(1);
       expect(events[0].textContent).toBe("Reunião de Planejamento");
     });
