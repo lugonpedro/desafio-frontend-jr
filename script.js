@@ -20,7 +20,10 @@ document.addEventListener("DOMContentLoaded", async function () {
   currentWeekStart.setDate(currentWeekStart.getDate() - dayOfWeek);
   renderCalendar(eventosJSON.eventos, currentWeekStart);
 
-  // buttons action
+  clickableButtons(eventosJSON, currentWeekStart, currentDate);
+});
+
+export function clickableButtons(eventosJSON, currentWeekStart, currentDate) {
   document.querySelector(".prev-week").addEventListener("click", function () {
     currentWeekStart.setDate(currentWeekStart.getDate() - 7);
     renderCalendar(eventosJSON.eventos, currentWeekStart);
@@ -42,7 +45,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       scrollToCurrentTime();
     });
-});
+}
 
 export function renderCalendar(events, currentWeekStart) {
   const calendarGrid = document.getElementById("calendar-grid");
@@ -143,40 +146,40 @@ export function renderCalendar(events, currentWeekStart) {
   addEventsToCalendar(events, currentWeekStart, calendarGrid);
 }
 
-export function addEventsToCalendar(events, currentWeekStart, calendarGrid) {
-  if (events) {
-    events.forEach((evento) => {
-      const startDate = new Date(evento.data_inicio);
-      const endDate = new Date(evento.data_fim);
+function addEventsToCalendar(events, currentWeekStart, calendarGrid) {
+  if (!events) return;
 
-      if (isDateInWeek(startDate, currentWeekStart)) {
-        const eventDay = startDate.getDay();
-        const dayColumn = calendarGrid.children[eventDay + 1]; // +1 because the first column is the time column
+  events.forEach((evento) => {
+    const startDate = new Date(evento.data_inicio);
+    const endDate = new Date(evento.data_fim);
 
-        const startHour = startDate.getHours();
-        const startMinute = startDate.getMinutes();
-        const endHour = endDate.getHours();
-        const endMinute = endDate.getMinutes();
+    if (isDateInWeek(startDate, currentWeekStart)) {
+      const eventDay = startDate.getDay();
+      const dayColumn = calendarGrid.children[eventDay + 1]; // +1 because the first column is the time column
 
-        const startPosition = startHour * 60 + startMinute;
-        const endPosition = endHour * 60 + endMinute;
-        const duration = endPosition - startPosition;
+      const startHour = startDate.getHours();
+      const startMinute = startDate.getMinutes();
+      const endHour = endDate.getHours();
+      const endMinute = endDate.getMinutes();
 
-        const eventElement = document.createElement("div");
-        eventElement.className = "event";
-        eventElement.textContent = evento.nome;
-        eventElement.style.color = evento.cor;
-        eventElement.style.backgroundColor = evento.cor + "4D"; // add 4D for opacity
+      const startPosition = startHour * 60 + startMinute;
+      const endPosition = endHour * 60 + endMinute;
+      const duration = endPosition - startPosition;
 
-        eventElement.style.top = `${100 + startPosition}px`;
-        eventElement.style.height = `${duration - 10}px`;
-        eventElement.style.left = "5px";
-        eventElement.style.right = "5px";
+      const eventElement = document.createElement("div");
+      eventElement.className = "event";
+      eventElement.textContent = evento.nome;
+      eventElement.style.color = evento.cor;
+      eventElement.style.backgroundColor = evento.cor + "4D"; // add 4D for opacity
 
-        dayColumn.appendChild(eventElement);
-      }
-    });
-  }
+      eventElement.style.top = `${100 + startPosition}px`;
+      eventElement.style.height = `${duration - 10}px`;
+      eventElement.style.left = "5px";
+      eventElement.style.right = "5px";
+
+      dayColumn.appendChild(eventElement);
+    }
+  });
 }
 
 function scrollToCurrentTime() {
